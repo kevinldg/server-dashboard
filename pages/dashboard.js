@@ -1,21 +1,14 @@
 import DockerContainer from "@/components/DockerContainer/DockerContainer";
+import ServerStatus from "@/components/ServerStatus/ServerStatus";
 
 export default function Dashboard() {
   const username = "GuNShOtzZ";
-  const serverStatus = false;
 
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-2">
         <p className="text-2xl font-bold">Hello, {username}!</p>
-        <p>
-          Der Server ist aktuell{" "}
-          {serverStatus ? (
-            <span className="font-bold text-green-500">online</span>
-          ) : (
-            <span className="font-bold text-red-500">offline</span>
-          )}
-        </p>
+        <ServerStatus />
       </div>
       <div className="flex flex-col gap-4">
         <p className="font-bold">Folgende Container sind verfügbar:</p>
