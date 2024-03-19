@@ -7,14 +7,14 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-2">
-        <p className="text-2xl font-bold">Hello, {username}!</p>
+        <p className="text-2xl font-bold">Hallo, {username}!</p>
         <ServerStatus />
       </div>
       <div className="flex flex-col gap-4">
         <p className="font-bold">Folgende Container sind verfügbar:</p>
         <div className="flex flex-col gap-2">
           <DockerContainer name="Minecraft Vanilla" isOnline />
-          <DockerContainer name="Garry's Mod" isOnline />
+          <DockerContainer name="Garry's Mod" />
           <DockerContainer name="Counter Strike 2 Server" isOnline />
         </div>
       </div>

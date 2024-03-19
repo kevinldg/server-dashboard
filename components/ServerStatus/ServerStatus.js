@@ -1,5 +1,5 @@
 export default function ServerStatus() {
-  const serverStatus = false;
+  const serverStatus = true;
 
   return (
     <p>
