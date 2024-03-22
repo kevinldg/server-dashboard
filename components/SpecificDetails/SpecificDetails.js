@@ -11,16 +11,24 @@ export default function SpecificDetails({ specificData }) {
       <div>
         <ul className="list-disc ms-6 text-sm">
           <li>{specificData.details.game}</li>
-          <li>Minecraft Version: {specificData.details.minecraftVersion}</li>
-          <li>
-            Forge Version: {specificData.details.forgeVersion}
-            <ul className="list-disc ms-4 mb-4 text-xs">
-              {specificData.details.mods.map((mod) => (
-                <li>{mod}</li>
-              ))}
-            </ul>
-          </li>
-          <li>Spieler Limit: {specificData.details.playerLimit}</li>
+          {specificData.details.minecraftVersion && (
+            <li>Minecraft Version: {specificData.details.minecraftVersion}</li>
+          )}
+          {specificData.details.forgeVersion && (
+            <li>
+              Forge Version: {specificData.details.forgeVersion}
+              {specificData.details.mods && (
+                <ul className="list-disc ms-4 mb-4 text-xs">
+                  {specificData.details.mods.map((mod) => (
+                    <li>{mod}</li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          )}
+          {specificData.details.playerLimit > -1 && (
+            <li>Spieler Limit: {specificData.details.playerLimit}</li>
+          )}
         </ul>
       </div>
     </div>
