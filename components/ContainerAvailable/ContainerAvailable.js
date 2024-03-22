@@ -2,10 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDocker } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
 
-export default function ContainerAvailable({ name, state }) {
+export default function ContainerAvailable({ id, name, state }) {
   return (
     <Link
-      href={"/container/" + name}
+      href={"/container/" + id}
       className=" bg-neutral-200 w-80 shadow hover:scale-[1.025] transition-transform"
     >
       <div className="px-4 py-2 flex justify-between items-center">

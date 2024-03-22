@@ -7,7 +7,7 @@ export default async function Handler(req, res) {
 
   try {
     const response = await axios.get(
-      "http://demacia-srv01:2375/containers/json?all=true"
+      process.env.API_URL + "/containers/json?all=true"
     );
 
     if (response.status === 200) {

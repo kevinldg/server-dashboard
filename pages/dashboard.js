@@ -53,6 +53,7 @@ export default function Dashboard() {
               data.map(({ Id, Names, State }) => (
                 <ContainerAvailable
                   key={Id}
+                  id={Id}
                   name={Names[0].slice(1)}
                   state={State}
                 />
