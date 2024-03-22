@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDocker } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
 
-export default function ContainerAvailable({ name, isOnline }) {
+export default function ContainerAvailable({ name, state }) {
   return (
     <Link
       href={"/container/" + name}
@@ -13,7 +13,7 @@ export default function ContainerAvailable({ name, isOnline }) {
           <FontAwesomeIcon icon={faDocker} />
           <h3>{name}</h3>
         </div>
-        {isOnline ? (
+        {state === "running" ? (
           <div className="bg-green-500 w-3 h-3 rounded-full"></div>
         ) : (
           <div className="bg-red-500 w-3 h-3 rounded-full"></div>
