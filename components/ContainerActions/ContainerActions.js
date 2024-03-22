@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 
-export default function ContainerActions({ id }) {
+export default function ContainerActions({ id, name }) {
   const router = useRouter();
 
   const handleStartContainer = async () => {
@@ -10,6 +10,14 @@ export default function ContainerActions({ id }) {
         "/api/containers/" + (id && id) + "/start"
       );
       console.log("Starten des Containers:", response.data);
+      setTimeout(() => {
+        router.push({
+          pathname: "/dashboard",
+          query: {
+            notification: "Der Container " + name + " wurde gestartet.",
+          },
+        });
+      }, 2000);
     } catch (error) {
       console.error("Fehler beim Starten des Containers:", error);
     }
@@ -21,6 +29,12 @@ export default function ContainerActions({ id }) {
         "/api/containers/" + (id && id) + "/stop"
       );
       console.log("Stoppen des Containers:", response.data);
+      setTimeout(() => {
+        router.push({
+          pathname: "/dashboard",
+          query: { notification: "Der Container " + name + " wurde gestoppt." },
+        });
+      }, 2000);
     } catch (error) {
       console.error("Fehler beim Stoppen des Containers:", error);
     }
@@ -32,6 +46,14 @@ export default function ContainerActions({ id }) {
         "/api/containers/" + (id && id) + "/restart"
       );
       console.log("Neustarten des Containers:", response.data);
+      setTimeout(() => {
+        router.push({
+          pathname: "/dashboard",
+          query: {
+            notification: "Der Container " + name + " wurde neu gestartet.",
+          },
+        });
+      }, 2000);
     } catch (error) {
       console.error("Fehler beim Neustarten des Containers:", error);
     }
@@ -44,7 +66,10 @@ export default function ContainerActions({ id }) {
       );
       console.log("Löschen des Containers:", response.data);
       setTimeout(() => {
-        router.push("/dashboard");
+        router.push({
+          pathname: "/dashboard",
+          query: { notification: "Der Container " + name + " wurde gelöscht." },
+        });
       }, 2000);
     } catch (error) {
       console.error("Fehler beim Löschen des Containers:", error);

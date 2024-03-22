@@ -39,9 +39,9 @@ export default function ContainerDetails() {
         <ContainerStatus status={data && data.State.Status} />
       </div>
       <SpecificDetails containerName={data?.Name} specificData={envVariables} />
-      <ContainerActions id={data?.Id} />
+      <ContainerActions id={data?.Id} name={data?.Name} />
       <div className="flex gap-4">
-        <ul>
+        <ul className="text-nowrap">
           <li>Container ID:</li>
           <li>Image:</li>
           <li>Created:</li>
