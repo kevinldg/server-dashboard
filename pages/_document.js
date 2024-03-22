@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>Next.js App</title>
+        <title>Server Dashboard</title>
       </Head>
       <body>
         <Main />
