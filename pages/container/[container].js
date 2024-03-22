@@ -39,7 +39,7 @@ export default function ContainerDetails() {
         <ContainerStatus status={data && data.State.Status} />
       </div>
       <SpecificDetails containerName={data?.Name} specificData={envVariables} />
-      <ContainerActions />
+      <ContainerActions id={data?.Id} />
       <div className="flex gap-4">
         <ul>
           <li>Container ID:</li>
