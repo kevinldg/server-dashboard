@@ -29,7 +29,7 @@ const containersToCreate = [
 export default function Dashboard() {
   const [data, setData] = useState(null);
   const [notification, setNotification] = useState(null);
-  const serverAvailable = data && data.length > 0 ? true : false;
+  const serverAvailable = data?.length > 0 ? true : false;
 
   const router = useRouter();
 
@@ -64,7 +64,7 @@ export default function Dashboard() {
         <p className="text-2xl font-bold">Hallo, {username}!</p>
         <ServerStatus />
       </div>
-      {notification && notification.length > 0 && (
+      {notification?.length > 0 && (
         <p className="bg-blue-100 border-solid border-2 border-blue-200 p-4 w-fit">
           <FontAwesomeIcon icon={faInfoCircle} className="me-4" />
           {notification}
@@ -74,15 +74,14 @@ export default function Dashboard() {
         <div className="flex flex-col gap-4">
           <p className="font-bold">Folgende Container sind verfügbar:</p>
           <div className="flex flex-col gap-2">
-            {serverAvailable &&
-              data.map(({ Id, Names, State }) => (
-                <ContainerAvailable
-                  key={Id}
-                  id={Id}
-                  name={Names[0].slice(1)}
-                  state={State}
-                />
-              ))}
+            {data.map(({ Id, Names, State }) => (
+              <ContainerAvailable
+                key={Id}
+                id={Id}
+                name={Names[0].slice(1)}
+                state={State}
+              />
+            ))}
           </div>
         </div>
       )}

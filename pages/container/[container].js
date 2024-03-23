@@ -35,8 +35,8 @@ export default function ContainerDetails() {
     <div className="flex flex-col gap-4">
       <BackToDashboard />
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">{data && data.Name.slice(1)}</h2>
-        <ContainerStatus status={data && data.State.Status} />
+        <h2 className="text-2xl font-bold">{data?.Name.slice(1)}</h2>
+        <ContainerStatus status={data?.State.Status} />
       </div>
       <SpecificDetails containerName={data?.Name} specificData={envVariables} />
       <ContainerActions id={data?.Id} name={data?.Name} />
@@ -49,11 +49,11 @@ export default function ContainerDetails() {
           <li>Name:</li>
         </ul>
         <ul>
-          <li>{data && data.Id}</li>
-          <li>{data && data.Config.Image}</li>
-          <li>{data && data.Created}</li>
-          <li>{data && data.State.Status}</li>
-          <li>{data && data.Name.slice(1)}</li>
+          <li>{data?.Id}</li>
+          <li>{data?.Config.Image}</li>
+          <li>{data?.Created}</li>
+          <li>{data?.State.Status}</li>
+          <li>{data?.Name.slice(1)}</li>
         </ul>
       </div>
     </div>
