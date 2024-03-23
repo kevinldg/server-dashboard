@@ -92,6 +92,7 @@ export default function MinecraftForgeForm() {
             id="maxPlayers"
             name="maxPlayers"
             type="number"
+            min="1"
             placeholder="z.B. 2"
             className=" bg-neutral-200 p-1"
           />

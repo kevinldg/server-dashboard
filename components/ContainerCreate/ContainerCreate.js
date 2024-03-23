@@ -6,7 +6,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 export default function ContainerCreate({ name }) {
   return (
     <Link
-      href="/create"
+      href={"/create?container=" + name}
       className=" bg-neutral-200 w-80 shadow hover:scale-[1.025] transition-transform"
     >
       <div className="px-4 py-2 flex justify-between items-center">

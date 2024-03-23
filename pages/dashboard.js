@@ -12,18 +12,11 @@ import ServerStatus from "@/components/ServerStatus/ServerStatus";
 const username = "GuNShOtzZ";
 
 const containersToCreate = [
-  {
-    name: "Minecraft Vanilla",
-  },
-  {
-    name: "Minecraft Forge",
-  },
-  {
-    name: "Teamspeak 3",
-  },
-  {
-    name: "Counter Strike 2",
-  },
+  "Minecraft Vanilla",
+  "Minecraft Forge",
+  "Teamspeak 3",
+  "Counter Strike 2",
+  "Satisfactory",
 ];
 
 export default function Dashboard() {
@@ -89,7 +82,7 @@ export default function Dashboard() {
         <div className="flex flex-col gap-4">
           <p className="font-bold">Container erstellen</p>
           <div className="flex flex-col gap-2">
-            {containersToCreate.map(({ name }) => (
+            {containersToCreate.map((name) => (
               <ContainerCreate name={name} />
             ))}
           </div>
