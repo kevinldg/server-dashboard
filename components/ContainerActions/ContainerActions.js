@@ -1,15 +1,29 @@
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useState } from "react";
+
+import {
+  faPowerOff,
+  faRotate,
+  faTrashCan,
+} from "@fortawesome/free-solid-svg-icons";
+
+import CurrentAction from "./CurrentAction";
 
 export default function ContainerActions({ id, name }) {
   const router = useRouter();
 
+  const [currentAction, setCurrentAction] = useState(null);
+
   const handleStartContainer = async () => {
     try {
+      setCurrentAction(["start", faPowerOff]);
+
       const response = await axios.get(
         "/api/containers/" + (id && id) + "/start"
       );
       console.log("Starten des Containers:", response.data);
+
       setTimeout(() => {
         router.push({
           pathname: "/dashboard",
@@ -25,10 +39,13 @@ export default function ContainerActions({ id, name }) {
 
   const handleStopContainer = async () => {
     try {
+      setCurrentAction(["stop", faPowerOff]);
+
       const response = await axios.get(
         "/api/containers/" + (id && id) + "/stop"
       );
       console.log("Stoppen des Containers:", response.data);
+
       setTimeout(() => {
         router.push({
           pathname: "/dashboard",
@@ -42,10 +59,13 @@ export default function ContainerActions({ id, name }) {
 
   const handleRestartContainer = async () => {
     try {
+      setCurrentAction(["restart", faRotate]);
+
       const response = await axios.get(
         "/api/containers/" + (id && id) + "/restart"
       );
       console.log("Neustarten des Containers:", response.data);
+
       setTimeout(() => {
         router.push({
           pathname: "/dashboard",
@@ -61,10 +81,13 @@ export default function ContainerActions({ id, name }) {
 
   const handleDeleteContainer = async () => {
     try {
+      setCurrentAction(["delete", faTrashCan]);
+
       const response = await axios.get(
         "/api/containers/" + (id && id) + "/delete"
       );
       console.log("Löschen des Containers:", response.data);
+
       setTimeout(() => {
         router.push({
           pathname: "/dashboard",
@@ -112,6 +135,7 @@ export default function ContainerActions({ id, name }) {
           </button>
         </li>
       </ul>
+      <CurrentAction currentAction={currentAction} />
     </>
   );
 }
