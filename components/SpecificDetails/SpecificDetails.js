@@ -14,11 +14,7 @@ export default function SpecificDetails({ containerName, specificData }) {
     // Satisfactory
     "MAXPLAYERS",
     "STEAMBETA",
-    "AUTOSAVEINTERVAL",
-    "AUTOSAVENUM",
     "AUTOSAVEONDISCONNECT",
-    "MAXTICKRATE",
-    "TIMEOUT",
   ];
 
   const isGameserver = games.find((game) => containerName?.includes(game))

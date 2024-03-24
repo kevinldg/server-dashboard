@@ -14,8 +14,6 @@ const username = "GuNShOtzZ";
 const containersToCreate = [
   "Minecraft Vanilla",
   "Minecraft Forge",
-  "Teamspeak 3",
-  "Counter Strike 2",
   "Satisfactory",
 ];
 
@@ -41,7 +39,7 @@ export default function Dashboard() {
               pathname: router.pathname,
               query: {},
             });
-          }, 5000);
+          }, 1000);
         }
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -1,55 +1,154 @@
-export function MinecraftVanillaForm() {
-  const availableMinecraftVersions = [
-    {
-      title: "1.5.2",
-      version: "1.5.2",
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
+
+export default function MinecraftVanillaForm() {
+  console.clear();
+
+  const router = useRouter();
+  const availableMinecraftVersions = ["1.12.2", "1.19.2", "1.20.2"];
+
+  const [containerConfig, setContainerConfig] = useState({
+    Name: "",
+    Image: "itzg/minecraft-server",
+    HostConfig: {
+      PortBindings: {
+        "25565/tcp": [
+          {
+            HostPort: "25565",
+          },
+        ],
+      },
+      PublishAllPorts: "false",
+      Binds: [`/home/minecraft-server:/data`],
     },
-    {
-      title: "1.7.10",
-      version: "1.7.10",
+    Env: {
+      EULA: "TRUE",
+      JAVA_VERSION: "jdk-17.0.8+7",
+      TYPE: "VANILLA",
+      VERSION:
+        availableMinecraftVersions[availableMinecraftVersions.length - 1],
+      MEMORY: "8G",
+      RCON_PASSWORD: "Start-01",
     },
-    {
-      title: "1.12.20",
-      version: "1.12.20",
-    },
-    {
-      title: "Neuste Version (Stable Release)",
-      version: "1.20.4",
-    },
-  ];
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const envConfig = Object.entries(containerConfig.Env).map(
+        ([key, value]) => `${key}=${value}`
+      );
+
+      const requestBody = {
+        Image: containerConfig.Image,
+        Env: envConfig,
+        Name: containerConfig.Name,
+        HostConfig: {
+          Binds: containerConfig.HostConfig.Binds,
+        },
+      };
+
+      const response = await axios.post("/api/containers/create", requestBody);
+      console.log(response.data);
+
+      setTimeout(() => {
+        router.push({
+          pathname: "/dashboard",
+          query: {
+            notification:
+              "Der Container " + containerConfig.Name + " wurde erstellt.",
+          },
+        });
+      }, 2000);
+    } catch (error) {
+      console.error("Fehler beim Erstellen des Minecraft Containers.");
+    }
+  };
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+
+  //   if (name === "VERSION" || name === "MEMORY") {
+  //     setContainerConfig({
+  //       ...containerConfig,
+  //       Env: {
+  //         ...containerConfig.Env,
+  //         [name]: value,
+  //       },
+  //     });
+  //   } else {
+  //     setContainerConfig({
+  //       ...containerConfig,
+  //       [name]: value,
+  //     });
+  //   }
+  // };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "VERSION" || name === "MEMORY") {
+      setContainerConfig((prevConfig) => ({
+        ...prevConfig,
+        Env: {
+          ...prevConfig.Env,
+          [name]: value,
+        },
+      }));
+    } else {
+      setContainerConfig((prevConfig) => ({
+        ...prevConfig,
+        [name]: value,
+        HostConfig: {
+          ...prevConfig.HostConfig,
+          Binds:
+            name === "Name"
+              ? [`/home/${value}:/data`]
+              : [...prevConfig.HostConfig.Binds, `/home/${value}:/data`],
+        },
+      }));
+    }
+  };
 
   return (
     <div className="flex flex-col gap-4">
       <h2 className="font-bold text-2xl">Minecraft Vanilla</h2>
-      <form className="flex flex-col gap-4 w-80">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-80">
         <div className="flex flex-col">
           <label>Name des Containers</label>
           <input
-            id="containerName"
-            name="containerName"
+            onChange={handleChange}
             type="text"
-            placeholder="z.B. minecraft-server-01"
+            name="Name"
+            value={containerConfig.Name}
+            className=" bg-neutral-200 p-1"
+            placeholder="z.B. minecraft-server01"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label>Arbeitsspeicher in GB (Format: 8G)</label>
+          <input
+            onChange={handleChange}
+            type="text"
+            name="MEMORY"
+            value={containerConfig.Env.MEMORY}
             className=" bg-neutral-200 p-1"
           />
         </div>
         <div className="flex flex-col">
           <label>Minecraft Version</label>
-          <select id="minecraftVersion" name="minecraftVersion" className="p-1">
-            {availableMinecraftVersions.map(({ title, version }) => (
-              <option value={version}>{title}</option>
+          <select
+            onChange={handleChange}
+            name="VERSION"
+            value={containerConfig.Env.VERSION}
+            className=" bg-neutral-200 p-1"
+          >
+            {availableMinecraftVersions.map((version) => (
+              <option value={version}>{version}</option>
             ))}
           </select>
-        </div>
-        <div className="flex flex-col">
-          <label>Maximale Spieleranzahl</label>
-          <input
-            id="maxPlayers"
-            name="maxPlayers"
-            type="number"
-            min="1"
-            placeholder="z.B. 2"
-            className=" bg-neutral-200 p-1"
-          />
         </div>
         <button
           type="submit"

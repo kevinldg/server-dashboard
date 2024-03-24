@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
+import MinecraftVanillaForm from "@/components/Forms/MinecraftVanilla";
 import MinecraftForgeForm from "@/components/Forms/MinecraftForge";
-import { MinecraftVanillaForm } from "@/components/Forms/MinecraftVanilla";
+import SatisfactoryForm from "@/components/Forms/Satisfactory";
 import BackToDashboard from "@/components/BackToDashboard/BackToDashboard";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
-import { SatisfactoryForm } from "@/components/Forms/Satisfactory";
 
 export default function Create() {
   const router = useRouter();
