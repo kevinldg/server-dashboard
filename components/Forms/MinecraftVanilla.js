@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 export default function MinecraftVanillaForm() {
-  console.clear();
-
   const router = useRouter();
   const availableMinecraftVersions = ["1.12.2", "1.19.2", "1.20.2"];
 
@@ -66,25 +64,6 @@ export default function MinecraftVanillaForm() {
       console.error("Fehler beim Erstellen des Minecraft Containers.");
     }
   };
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-
-  //   if (name === "VERSION" || name === "MEMORY") {
-  //     setContainerConfig({
-  //       ...containerConfig,
-  //       Env: {
-  //         ...containerConfig.Env,
-  //         [name]: value,
-  //       },
-  //     });
-  //   } else {
-  //     setContainerConfig({
-  //       ...containerConfig,
-  //       [name]: value,
-  //     });
-  //   }
-  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;

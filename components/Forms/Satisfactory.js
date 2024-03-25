@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 export default function SatisfactoryForm() {
-  console.clear();
-
   const router = useRouter();
 
   const [containerConfig, setContainerConfig] = useState({
@@ -76,25 +74,6 @@ export default function SatisfactoryForm() {
       console.error("Fehler beim Erstellen des Satisfactory Containers.");
     }
   };
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-
-  //   if (name === "MAXPLAYERS" || name === "STEAMBETA") {
-  //     setContainerConfig({
-  //       ...containerConfig,
-  //       Env: {
-  //         ...containerConfig.Env,
-  //         [name]: value,
-  //       },
-  //     });
-  //   } else {
-  //     setContainerConfig({
-  //       ...containerConfig,
-  //       [name]: value,
-  //     });
-  //   }
-  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
