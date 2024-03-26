@@ -84,7 +84,12 @@ export default function ContainerActions({ id, name }) {
       setCurrentAction(["delete", faTrashCan]);
 
       const response = await axios.get(
-        "/api/containers/" + (id && id) + "/delete"
+        "/api/containers/" + (id && id) + "/delete",
+        {
+          params: {
+            name: name,
+          },
+        }
       );
       console.log("Löschen des Containers:", response.data);
 
