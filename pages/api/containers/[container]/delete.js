@@ -23,35 +23,35 @@ export default async function Handler(req, res) {
       process.env.API_URL + "/containers/" + container
     );
 
-    connection
-      .on("ready", () => {
-        connection.exec(`rm -r /home${name}`, (error, stream) => {
-          if (error) {
-            console.error("Error:", error);
-            return res.status(500).json({ error: "Internal Server Error" });
-          }
-
-          let STDOUT = "";
-          let STDERR = "";
-
-          stream
-            .on("close", (code, signal) => {
-              connection.end();
-              res.status(200).json({ stdout: STDOUT, stderr: STDERR });
-            })
-            .on("data", (data) => {
-              console.log("STDOUT:", data.toString());
-              STDOUT += data.toString();
-            })
-            .stderr.on("data", (data) => {
-              console.log("STDERR:", data.toString());
-              STDERR += data.toString();
-            });
-        });
-      })
-      .connect(sshConfig);
-
     if (response.status === 200) {
+      connection
+        .on("ready", () => {
+          connection.exec(`rm -r /home${name}`, (error, stream) => {
+            if (error) {
+              console.error("Error:", error);
+              return res.status(500).json({ error: "Internal Server Error" });
+            }
+
+            let STDOUT = "";
+            let STDERR = "";
+
+            stream
+              .on("close", (code, signal) => {
+                connection.end();
+                res.status(200).json({ stdout: STDOUT, stderr: STDERR });
+              })
+              .on("data", (data) => {
+                console.log("STDOUT:", data.toString());
+                STDOUT += data.toString();
+              })
+              .stderr.on("data", (data) => {
+                console.log("STDERR:", data.toString());
+                STDERR += data.toString();
+              });
+          });
+        })
+        .connect(sshConfig);
+
       res.status(200).json(response.data);
     } else {
       res.status(response.status).json({ error: "Failed to delete container" });
