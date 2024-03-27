@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function ContainerAvailable({ id, name, state }) {
   return (
     <Link
-      href={"/container/" + id}
+      href={"/containers/" + id}
       className=" bg-neutral-200 w-80 shadow hover:scale-[1.025] transition-transform"
     >
       <div className="px-4 py-2 flex justify-between items-center">
