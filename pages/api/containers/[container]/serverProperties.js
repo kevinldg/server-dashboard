@@ -14,12 +14,14 @@ export default function Handler(req, res) {
   };
 
   if (req.method === "GET") {
+    const containerName = req.query.containerName;
+
     try {
       const connection = new Client();
       connection
         .on("ready", () => {
           connection.exec(
-            "cat /home/minecraft-server01/server.properties",
+            "cat /home/" + containerName + "/server.properties",
             (error, stream) => {
               if (error) {
                 console.error("Error:", error);
@@ -61,7 +63,9 @@ export default function Handler(req, res) {
           connection.exec(
             "echo '" +
               (body && body.content) +
-              "' > /home/minecraft-server01/server.properties",
+              "' > /home/" +
+              (body && body.containerName) +
+              "/server.properties",
             (error, stream) => {
               if (error) {
                 console.error("Error:", error);

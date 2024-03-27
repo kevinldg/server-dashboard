@@ -2,10 +2,13 @@ import { Editor } from "@monaco-editor/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import BackToDashboard from "@/components/BackToDashboard/BackToDashboard";
 
 export default function ServerProperties() {
   const router = useRouter();
+
   const containerId = router.query.container;
+  const containerName = router.query.containerName?.slice(1);
 
   const [data, setData] = useState(null);
 
@@ -13,7 +16,8 @@ export default function ServerProperties() {
     try {
       if (containerId) {
         const response = await axios.get(
-          "/api/containers/" + containerId + "/serverProperties"
+          `/api/containers/${containerId}/serverProperties`,
+          { params: { containerName } }
         );
         setData(response.data.stdout);
       }
@@ -25,10 +29,10 @@ export default function ServerProperties() {
   const saveData = async () => {
     try {
       if (containerId) {
-        await axios.post(
-          "/api/containers/" + containerId + "/serverProperties",
-          { content: data }
-        );
+        await axios.post(`/api/containers/${containerId}/serverProperties`, {
+          content: data,
+          containerName: containerName,
+        });
         console.log("Data saved successfully");
       }
     } catch (error) {
@@ -53,7 +57,9 @@ export default function ServerProperties() {
 
   return (
     <>
-      <h2 className="font-bold text-xl">{containerId}</h2>
+      <BackToDashboard />
+      <h2 className="font-bold text-xl">{containerName}</h2>
+      <p>/home/{containerName}/server.properties</p>
       <Editor
         width="75vw"
         height="75vh"

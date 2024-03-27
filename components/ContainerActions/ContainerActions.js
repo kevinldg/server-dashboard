@@ -104,6 +104,21 @@ export default function ContainerActions({ id, name }) {
     }
   };
 
+  const handleEditServerProperties = async () => {
+    try {
+      setTimeout(() => {
+        router.push({
+          pathname: "/containers/" + id + "/serverProperties",
+          query: {
+            containerName: name,
+          },
+        });
+      }, 1000);
+    } catch (error) {
+      console.error("Fehler beim Editieren der Server Properties:", error);
+    }
+  };
+
   return (
     <>
       <ul className="flex items-center gap-2">
@@ -139,6 +154,16 @@ export default function ContainerActions({ id, name }) {
             Löschen
           </button>
         </li>
+        {name && name.includes("minecraft") && (
+          <li className="shadow hover:scale-[1.025] transition-transform">
+            <button
+              onClick={handleEditServerProperties}
+              className=" bg-blue-500 text-white px-2 py-1"
+            >
+              server.properties bearbeiten
+            </button>
+          </li>
+        )}
       </ul>
       <CurrentAction currentAction={currentAction} />
     </>
