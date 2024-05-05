@@ -36,7 +36,7 @@ export default async function Handler(req, res) {
             let STDERR = "";
 
             stream
-              .on("close", (code, signal) => {
+              .on("close", () => {
                 connection.end();
                 res.status(200).json({ stdout: STDOUT, stderr: STDERR });
               })

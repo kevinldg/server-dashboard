@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Client } from "ssh2";
 
 export default function Handler(req, res) {
@@ -32,7 +31,7 @@ export default function Handler(req, res) {
               let STDERR = "";
 
               stream
-                .on("close", (code, signal) => {
+                .on("close", () => {
                   connection.end();
                   res.status(200).json({ stdout: STDOUT, stderr: STDERR });
                 })

@@ -9,8 +9,6 @@ import ContainerAvailable from "@/components/ContainerAvailable/ContainerAvailab
 import ContainerCreate from "@/components/ContainerCreate/ContainerCreate";
 import ServerStatus from "@/components/ServerStatus/ServerStatus";
 
-const username = "GuNShOtzZ";
-
 const containersToCreate = [
   "Minecraft Vanilla",
   "Minecraft Forge",
@@ -52,7 +50,7 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-2">
-        <p className="text-2xl font-bold">Hallo, {username}!</p>
+        <p className="text-2xl font-bold">Hallo, User!</p>
         <ServerStatus />
       </div>
       {notification?.length > 0 && (
