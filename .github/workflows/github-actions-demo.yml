@@ -8,6 +8,6 @@ jobs:
       - name: Install node packages
         run: npm i
       - name: Build the repository
-        run: npm run build
-      - name: Start the web app
+        run: npm run dev
+      - name: Start the web app in dev environment
         run: npm run start
