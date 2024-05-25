@@ -4,6 +4,7 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v4
       - name: Install node packages
         run: npm i
       - name: Build the repository
