@@ -1,13 +1,25 @@
-name: Deployment
-on: [push]
+name: Deployment Workflow
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  deploy:
+  Deployment:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v4
-      - name: Install node packages
-        run: npm i
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Build the repository
-        run: npm run dev
-      - name: Start the web app in dev environment
-        run: npm run start
+        run: npm run build
+
+      - name: Stop running application
+        run: pm2 delete server-dashboard || true
+
+      - name: Start the application
+        run: pm2 start npm --name=server-dashboard -- start
