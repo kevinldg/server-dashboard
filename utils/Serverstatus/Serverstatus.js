@@ -7,9 +7,7 @@ export default function Serverstatus() {
   useEffect(() => {
     async function fetchServerStatus() {
       try {
-        const response = await axios.get(
-          `${process.env.API_URL}/containers/json`
-        );
+        const response = await axios.get(`/api/containers`);
 
         if (response.status === 200) {
           setIsServerOnline(true);
