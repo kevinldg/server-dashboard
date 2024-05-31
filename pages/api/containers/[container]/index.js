@@ -9,7 +9,7 @@ export default async function Handler(req, res) {
 
   try {
     const response = await axios.get(
-      process.env.API_URL + "/containers/" + container + "/json"
+      `${process.env.API_URL}/containers/${container}/json`
     );
 
     if (response.status === 200) {
