@@ -1,7 +1,10 @@
+import Serverstatus from "@/utils/Serverstatus/Serverstatus";
+
 export default function Header() {
   return (
-    <header className=" bg-neutral-600 text-white shadow-md p-4 flex justify-between items-center">
-      <h1 className="font-bold text-xl">Server Dashboard</h1>
+    <header className="bg-neutral-800 flex justify-between items-center p-4 shadow">
+      <h1 className="text-xl font-bold">Server Dashboard</h1>
+      <Serverstatus />
     </header>
   );
 }

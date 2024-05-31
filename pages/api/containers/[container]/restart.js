@@ -9,10 +9,10 @@ export default async function Handler(req, res) {
 
   try {
     const response = await axios.post(
-      process.env.API_URL + "/containers/" + container + "/restart"
+      `${process.env.API_URL}/containers/${container}/restart`
     );
 
-    if (response.status === 200) {
+    if (response.status === 204) {
       res.status(200).json(response.data);
     } else {
       res
@@ -20,6 +20,6 @@ export default async function Handler(req, res) {
         .json({ error: "Failed to restart container" });
     }
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: error });
   }
 }

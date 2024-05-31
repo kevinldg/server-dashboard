@@ -22,4 +22,7 @@ jobs:
         run: pm2 delete server-dashboard || true
 
       - name: Start the application
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          FILEPATH: ${{ secrets.FILEPATH }}
         run: pm2 start npm --name=server-dashboard -- start
