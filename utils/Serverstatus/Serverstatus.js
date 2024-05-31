@@ -8,7 +8,7 @@ export default function Serverstatus() {
     async function fetchServerStatus() {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/containers"
+          `${process.env.NEXT_URL}/api/containers`
         );
 
         if (response.status === 200) {
