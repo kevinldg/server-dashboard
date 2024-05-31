@@ -25,5 +25,4 @@ jobs:
         env:
           API_URL: ${{ secrets.API_URL }}
           FILEPATH: ${{ secrets.FILEPATH }}
-          NEXT_URL: ${{ secrets.NEXT_URL }}
         run: pm2 start npm --name=server-dashboard -- start
