@@ -8,6 +8,8 @@ on:
 jobs:
   Deployment:
     runs-on: self-hosted
+    env:
+      API_URL: ${{ secrets.API_URL }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -16,8 +18,6 @@ jobs:
         run: npm install
 
       - name: Build the repository
-        env:
-          API_URL: ${{ secrets.API_URL }}
         run: npm run build
 
       - name: Stop running application
