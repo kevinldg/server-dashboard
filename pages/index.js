@@ -24,8 +24,12 @@ export default function Home() {
       <>
         <section className="flex flex-col gap-4">
           <h2 className="text-xl font-bold">Available Container</h2>
-          {data.map(({ Names, State }) => (
-            <AvailableContainer name={Names[0].slice(1)} state={State} />
+          {data.map(({ Names, State }, index) => (
+            <AvailableContainer
+              key={index}
+              name={Names[0].slice(1)}
+              state={State}
+            />
           ))}
         </section>
       </>
