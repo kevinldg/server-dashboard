@@ -14,6 +14,10 @@ export default function ContainerDetails() {
   useEffect(() => {
     async function fetchData() {
       try {
+        if (!container) {
+          return;
+        }
+
         const response = await axios.get("/api/containers/" + container);
         setData(response.data);
       } catch (error) {
@@ -45,7 +49,11 @@ export default function ContainerDetails() {
             <li>{data.Created}</li>
           </ul>
         </div>
-        <ContainerActions id={data.Id} name={data.Name.slice(1)} />
+        <ContainerActions
+          id={data.Id}
+          name={data.Name.slice(1)}
+          state={data.State.Status}
+        />
       </section>
     )
   );
