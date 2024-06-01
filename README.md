@@ -1,8 +1,19 @@
 # server-dashboard
 
-A web app to manage my docker server based on linux.
+A web app to manage docker on my server 🐳
 
 ## Setup the app
+
+<details>
+  <br/>
+  <summary>Environment variables</summary>
+
+  ℹ️ Please note that you must have set up the Docker Engine API on your Docker daemon!
+  
+  ```
+  API_URL=https://YOUR_SERVER:YOUR_PORT
+  ```
+</details>
 
 1. Clone the repository from GitHub
 ```
