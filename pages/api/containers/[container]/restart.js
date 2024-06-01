@@ -17,7 +17,7 @@ export default async function Handler(req, res) {
     } else {
       res
         .status(response.status)
-        .json({ error: "Failed to restart container" });
+        .json({ error: `Failed to restart container ${container}` });
     }
   } catch (error) {
     res.status(500).json({ error: error });

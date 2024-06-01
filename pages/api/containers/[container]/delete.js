@@ -15,7 +15,9 @@ export default async function Handler(req, res) {
     if (response.status === 204) {
       res.status(200).json(response.data);
     } else {
-      res.status(response.status).json({ error: "Failed to delete container" });
+      res
+        .status(response.status)
+        .json({ error: `Failed to delete container ${container}` });
     }
   } catch (error) {
     res.status(500).json({ error: error });
